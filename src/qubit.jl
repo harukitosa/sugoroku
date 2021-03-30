@@ -1,8 +1,8 @@
-import Pkg; Pkg.add(["StatsBase"])
+# import Pkg; Pkg.add(["StatsBase"])
 
 module qubit
     export Qubit, Measure
-    using StatsBase
+    using StatsBase, BitBasis
     struct Qubit
         _n_bits
         _states
@@ -33,10 +33,13 @@ module qubit
 
     function Measure(qubit)
         p = q_abs.(qubit._amp)
+        len = length(qubit._amp)
         wv = Weights(vec(p))
-        r = sample(1:length(qubit._amp), wv, 1)
-        # h = BitArray(r[1])
-        h =  bitstring(UInt16(r[1]))
-        return h
+        r = sample(1:len, wv, 1)
+        idx = r[1]
+        _states = 2^qubit._n_bits
+        amp = zeros(Int32, _states)
+        amp[idx] = 1
+        return amp
     end
 end
