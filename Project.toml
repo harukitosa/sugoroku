@@ -1,0 +1,4 @@
+name = "sugoroku"
+uuid = "9c56ac51-e62e-4e0a-8c49-54483b255db9"
+authors = ["harukitosa <13haruki28@gmail.com>"]
+version = "0.1.0"
